@@ -8,8 +8,11 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <p:inputText value="#{usuarioController.usuario.usuario}" placeholder="Usuario"/>
-        <p:password value="#{usuarioController.usuario.password}" placeholder="Contraseña"/>
+        <h:form>
+            <p:inputText value="#{usuarioController.user}" placeholder="Usuario"/>
+            <p:password value="#{usuarioController.pass}" placeholder="Contraseña"/>
+            <p:commandButton value="Ingresar" actionListener="#{usuarioController.startSession()}"/>
+        </h:form>
     </h:body>
 </html>
 

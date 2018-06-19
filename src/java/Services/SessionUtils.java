@@ -1,5 +1,6 @@
 package Services;
 
+import Model.Usuario;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,16 +17,16 @@ public class SessionUtils {
                 .getExternalContext().getRequest();
     }
 
-    public static String getUserName() {
+    public static Usuario getUserName() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
-        return (String) session.getAttribute("username");
+        return (Usuario) session.getAttribute("username");
     }
 
-    public static String getUserId() {
+    public static Usuario getUserId() {
         HttpSession session = getSession();
         if (session != null) {
-            return (String) session.getAttribute("userid");
+            return (Usuario) session.getAttribute("userid");
         } else {
             return null;
         }

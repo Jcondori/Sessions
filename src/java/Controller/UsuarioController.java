@@ -1,11 +1,13 @@
 package Controller;
 
+import Dao.UsuarioDao;
 import Model.Usuario;
-import Services.SessionUtils;
+import Services.Encriptar;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import javax.servlet.http.HttpSession;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import lombok.Data;
 
 @Data
@@ -14,10 +16,25 @@ import lombok.Data;
 public class UsuarioController implements Serializable {
 
     private Usuario usuario = new Usuario();
+    private String User;
+    private String Pass;
 
-    public void startSession() {
-        HttpSession session = SessionUtils.getSession();
-        session.setAttribute("username", usuario);
+    public void startSession() throws Exception {
+        UsuarioDao dao;
+        try {
+            dao = new UsuarioDao();
+            usuario = dao.startSession(User, Encriptar.encriptar(Pass));
+            if (usuario != null) {
+                FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().put("username", usuario);
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions/faces/index.xhtml");
+            } else {
+                setPass(null);
+                usuario = new Usuario();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Contraseña/Usuario Incorrecto"));
+            }
+        } catch (Exception e) {
+            throw e;
+        }
     }
-    
+
 }
