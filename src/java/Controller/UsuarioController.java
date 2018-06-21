@@ -26,7 +26,7 @@ public class UsuarioController implements Serializable {
             dao = new UsuarioDao();
             usuario = dao.startSession(User, Encriptar.encriptar(Pass));
             if (usuario != null) {
-                FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().put("username", usuario);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", usuario);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions/faces/index.xhtml");
             } else {
                 setPass(null);
@@ -36,6 +36,11 @@ public class UsuarioController implements Serializable {
         } catch (Exception e) {
             throw e;
         }
+    }
+    
+    public void obtenerDatos(){
+        Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
+        System.out.println(us.getApellido());
     }
 
 }
