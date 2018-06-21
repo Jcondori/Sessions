@@ -13,5 +13,6 @@ public class Usuario {
     private String Celular;
     private String Usuario;
     private String Password;
+    private String Nivel;
 
 }

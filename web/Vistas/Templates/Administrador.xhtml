@@ -8,11 +8,10 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form id="form">
-            <p:inputText value="#{usuarioController.user}" placeholder="Usuario"/>
-            <p:password value="#{usuarioController.pass}" placeholder="Contraseña"/>
-            <p:commandButton id="BtnIniciarSesion" value="Ingresar" actionListener="#{usuarioController.startSession()}"/>
-            <p:blockUI block="form" trigger="BtnIniciarSesion" />
+        <h1>Eres Administrador</h1>
+        <h:form>
+            <p:commandButton value="Cerrar Session" actionListener="#{usuarioController.finishSession()}"/>
+            <p:commandButton value="Obtener" actionListener="#{usuarioController.obtenerDatos()}"/>
         </h:form>
     </h:body>
 </html>

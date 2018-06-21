@@ -12,7 +12,7 @@ public class UsuarioDao extends DAO {
         ResultSet rs;
         Usuario usuario = null;
         try {
-            String sql = "Select Codigo,Nombre,Apellido,Correo,DNI,Celular from Usuarios where Usuario like ? and Pass like ? and Estado like 'A'";
+            String sql = "Select Codigo,Nombre,Apellido,Correo,DNI,Celular,Nivel from Usuarios where Usuario like ? and Pass like ? and Estado like 'A'";
             PreparedStatement ps = this.getCn().prepareCall(sql);
             ps.setString(1, User);
             ps.setString(2, Pass);
@@ -25,6 +25,7 @@ public class UsuarioDao extends DAO {
                 usuario.setCorreo(rs.getString("Correo"));
                 usuario.setDNI(rs.getString("DNI"));
                 usuario.setCelular(rs.getString("Celular"));
+                usuario.setNivel(rs.getString("Nivel"));
                 usuario.setUsuario(User);
                 usuario.setPassword(Pass);
             }

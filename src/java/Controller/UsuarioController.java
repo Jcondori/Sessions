@@ -3,6 +3,8 @@ package Controller;
 import Dao.UsuarioDao;
 import Model.Usuario;
 import Services.Encriptar;
+import Services.SessionUtils;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -19,7 +21,6 @@ public class UsuarioController implements Serializable {
     private String User;
     private String Pass;
 
-    //
     public void startSession() throws Exception {
         UsuarioDao dao;
         try {
@@ -27,7 +28,14 @@ public class UsuarioController implements Serializable {
             usuario = dao.startSession(User, Encriptar.encriptar(Pass));
             if (usuario != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", usuario);
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions/faces/index.xhtml");
+                switch (usuario.getNivel()) {
+                    case "1":
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions/Vistas/Templates/Administrador.xhtml");
+                        break;
+                    case "2":
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions/Vistas/Templates/Usuario.xhtml");
+                        break;
+                }
             } else {
                 setPass(null);
                 usuario = new Usuario();
@@ -37,10 +45,15 @@ public class UsuarioController implements Serializable {
             throw e;
         }
     }
-    
-    public void obtenerDatos(){
-        Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
-        System.out.println(us.getApellido());
+
+    public void finishSession() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions");
+    }
+
+    public void obtenerDatos() {
+        System.out.println(SessionUtils.ObtenerCodigoSesion());
+        System.out.println(SessionUtils.ObtenerNombreSesion());
     }
 
 }
