@@ -51,6 +51,26 @@ public class UsuarioController implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions");
     }
 
+    public void securityLogin() throws IOException {
+        Usuario us = SessionUtils.obtenerObjetoSesion();
+        if (us != null) {
+            switch (us.getNivel()) {
+                case "1":
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions/Vistas/Templates/Administrador.xhtml");
+                    break;
+                case "2":
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions/Vistas/Templates/Usuario.xhtml");
+                    break;
+            }
+        }
+    }
+
+    public void securitySession() throws IOException {
+        if (SessionUtils.obtenerObjetoSesion() == null) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/Sessions");
+        }
+    }
+
     public void obtenerDatos() {
         System.out.println(SessionUtils.ObtenerCodigoSesion());
         System.out.println(SessionUtils.ObtenerNombreSesion());

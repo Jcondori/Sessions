@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
+        <f:event type="preRenderView" listener="#{usuarioController.securityLogin()}"/>
     </h:head>
     <h:body>
         <h:form id="form">
