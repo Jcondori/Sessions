@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Usuario</title>
         <f:event type="preRenderView" listener="#{usuarioController.securitySession()}"/>
     </h:head>
     <h:body>
@@ -14,6 +14,7 @@
             <p:commandButton value="Cerrar Session" actionListener="#{usuarioController.finishSession()}"/>
             <p:commandButton value="Obtener" actionListener="#{usuarioController.obtenerDatos()}"/>
         </h:form>
+        <a href="../Paginas/Pagina.xhtml">Pagina Compartida</a>
     </h:body>
 </html>
 
