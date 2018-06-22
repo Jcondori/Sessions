@@ -1,0 +1,9 @@
+/*No carga el componente*/
+.ocultar {
+    display: none !important
+}
+
+/*Vuelve Invisible el componente*/
+.no-mostrar{
+    visibility: hidden !important;
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Compartido</title>
+        <link href="../../resources/css/styles.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <p:fieldset legend="Administrador" class="#{usuarioController.usuario.nivel != '1' ? 'ocultar':null}">
+            Este contenido solo lo puede ver el administrador
+        </p:fieldset>
+        <p:fieldset legend="Usuario">
+            Este contenido lo pueden ver todos
+        </p:fieldset>
+    </h:body>
+</html>
+
