@@ -11,20 +11,12 @@ public class SessionUtils {
 
     public static String ObtenerNombreSesion() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
-        if (us != null) {
-            return us.getNombre();
-        } else {
-            return null;
-        }
+        return us != null ? us.getNombre() : null;
     }
 
     public static String ObtenerCodigoSesion() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
-        if (us != null) {
-            return us.getCodigo();
-        } else {
-            return null;
-        }
+        return us != null ? us.getCodigo() : null;
     }
 
 }
